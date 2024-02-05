@@ -1,0 +1,6 @@
+civilian aircraft
+civilian car
+military aircraft
+military helicopter
+military tank
+military truck
