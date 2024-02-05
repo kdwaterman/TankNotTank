@@ -23,10 +23,10 @@ Optionally, you may also want to add a touch screen to make the setup portable. 
 It is worth noting that the Pi Zero runs rather a lot slower than the Pi 4, offering an average of ~2 FPS rather than ~5.5 FPS. However, the size differential between the two is considerable, which means the Pi Zero would probably be a better choice for a companion computer on a drone. 
 
 ### OS 
-This project uses the legacy 32-bit Raspberry Pi OS, Debian Bullseye. The latest OS, Bookworm, appears to have a whole host of compatability issues with the required Python packages, as well as with the main camera application software used by Raspberry Pi OS. Reverting to this legacy, 32-bit OS resolved all of these for me. 
+This project uses the legacy 32-bit Raspberry Pi OS, Debian Bullseye. The latest OS, Bookworm, appears to have a whole host of compatability issues with the required Python packages, as well as with the main camera application software used by Raspberry Pi OS. Reverting to this legacy, 32-bit OS resolved all of these issues for me. 
 
 ## Getting Setup
-If you've worked with the tensorflow examples before, the setup below will be familiar, but  it worth noting the 'libatlas-base-dev' install. This was not in the original instructional video I used to begin this project, so it led me astray for little while whilst I figured it out. In essence, libatlas is a linear algebra library which is integral to the machine learning functionality being deployed, and missing from default Raspberry Pi OS builds.  
+If you've worked with the tensorflow examples before, the setup below will be familiar, but it is worth noting the 'libatlas-base-dev' install. This was not in the original instructional video I used to begin this project, so it led me astray for little while whilst I figured it out. In essence, libatlas is a linear algebra library which is integral to the machine learning functionality being deployed, and missing from default Raspberry Pi OS builds.  
 
 
 ```
@@ -41,7 +41,7 @@ python3 -m pip install virtual env
 
 ```
 
-Next we make a virtual environment in which to clone the repo and install the require python packages. 
+Next we make a virtual environment in which to clone the repo and install the required python packages. 
 
 ```
 python3 -m venv tnt
@@ -63,16 +63,16 @@ There is a small chance this might not work, and if it doesn't you'll need to in
 | `protobuf>=3.18.0,<4 `| `protobuf>=3.18.0,<4 `  |
 
 ## Getting The Model Running
-So, now you have everything downloaded, how do we get the TankNotTank model running? Unsurprisingly for a Pi project, it begins with a further bit of configuration. In this case, we need to enable the legacy camera module. This can be done via `raspi-config` and following the relevant menu options. Now we're ready to actually use the model. Thankfully, this is the simple but, and can be accomplished by running the following command in the TankNotTank directory:
+So, now you have everything downloaded, how do we get the `TankNotTank.tflite` model running? Unsurprisingly for a Pi project, it begins with a further bit of configuration. In this case, we need to enable the legacy camera module. This can be done via `raspi-config` and following the relevant menu options. Now we're ready to actually use the model. Thankfully, this is the simple bit, and can be accomplished by running the following command in the TankNotTank directory:
 
 ```
 python3 detect.py --model TankNotTank.tflite
 ```
 
-If everything works, this should start up a new window with our camera output. If pointed at something vaguely relvant to the classes listed below a bounding box with class name and probability of match should appear. You'll note I've also added a small extra bit of functionality which marks the center of the detected object and the center of the camera's field-of-view, with a link between them. This doesn't serve a real purpose, but it's laying some groundwork for some extra functionality I may get around to adding. Similarly, it should also provide others with an easy starting point, too. 
+If everything works, this should start up a new window with our camera output. If pointed at something vaguely related to the classes listed below, a bounding box with class name and probability of match should appear. You'll note I've also added a small extra bit of functionality which marks the center of the detected object and the center of the camera's field-of-view, with a link between them. This doesn't serve a real purpose, but it lays some groundwork for extra functionality I may get around to adding. Similarly, it should also provide others with an easy starting point, too. 
 
 ## Training Your Own Model
-To train your own tank detecting model, you'll need to use your laptop, rather than the Pi. For the TankNotTank.tflite model I used this [Colab Notebook](https://colab.research.google.com/github/EdjeElectronics/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi/blob/master/Train_TFLite2_Object_Detction_Model.ipynb) put together by *EdjeElectronics* (if you haven't check out [their stuff](https://github.com/EdjeElectronics), you should, it's great). Essentially, the notebook takes a copy of the `ssd-mobilenet-v2-fpnlite-320` model and fine tunes it to your uploaded dataset. The training data I used can be found [here](https://data.mendeley.com/datasets/njdjkbxdpn/1), but it required a little manipulation and cleaning before I could use it properly, so my folder structure, and some of the data, differs from the original subtlety. This data may not be perfect, but it did the job, and was very kindly made public by the paper's authors.[^1] 
+To train your own tank detecting model, you'll need to use your laptop, rather than the Pi. For the `TankNotTank.tflite` model I used this [Colab Notebook](https://colab.research.google.com/github/EdjeElectronics/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi/blob/master/Train_TFLite2_Object_Detction_Model.ipynb) put together by *EdjeElectronics* (if you haven't checked out [their stuff](https://github.com/EdjeElectronics), you should, it's great). Essentially, the notebook takes a copy of the `ssd-mobilenet-v2-fpnlite-320` model and fine tunes it to your uploaded dataset. The training data I used can be found [here](https://data.mendeley.com/datasets/njdjkbxdpn/1), but it required a little manipulation and cleaning before I could use it properly, so my folder structure, and some of the data, differs from the original subtlety. This data may not be perfect, but it did the job, and was very kindly made public by the paper's authors.[^1] 
 
 The data has the following object classes:
 
