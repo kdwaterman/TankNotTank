@@ -5,7 +5,7 @@ Welcome to TankNotTank! This project was the result of a simple curiosity - how 
 
 As you will see, whilst it demonstrates an ability to accomplish the task in a basic sense, to get this right, reliable, and 'safe', would require a fair bit of extra effort. I've tested it on cars, trucks, and vans, but I'm a little short of tanks in my neighbourhood, however pointing it at images of them works well enough:
 
-![Testing against an image of a T-90](images/tnt.gif "TankNotTank in Action")
+![Testing against an image of a T-90](images/tnt.gif "Testing against an image of a T-90")
 
 This project draws very heavily on [tensorflow examples](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/raspberry_pi). However it makes a number of subtle changes that resolve some compatability issues that appear to have arisen since the original tensorflow examples were published. Indeed, if you take a look at the latest comments in this [explainer video](https://www.youtube.com/watch?v=mNjXEybFn98&t=173s), you'll find most of the them from keen, but disappointed, hobbyists struggling to get the project working. Whilst these issues were not technically complex to fix, they were a pain to find and fix, so at minimum I hope this might save someone else some time!
 
@@ -70,7 +70,7 @@ python3 detect.py --model TankNotTank.tflite
 If everything works, this should start up a new window with our camera output. If pointed at something vaguely relvant to the classes listed below a bounding box with class name and probability of match should appear. You'll note I've also added a small extra bit of functionality which marks the center of the detected object and the center of the camera's field-of-view, with a link between them. This doesn't serve a real purpose, but it's laying some groundwork for some extra functionality I may get around to adding. Similarly, it should also provide others with an easy starting point, too. 
 
 ## Training Your Own Model
-To train your own tank detecting model, you'll need to use your laptop, rather than the Pi. For the TankNotTank.tflite model I used this [Colab Notebook](https://colab.research.google.com/github/EdjeElectronics/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi/blob/master/Train_TFLite2_Object_Detction_Model.ipynb) put together by *EdjeElectronics* (if you haven't check out [their stuff](https://github.com/EdjeElectronics), you should, it's great). Essentially, the notebook takes a copy of the `ssd-mobilenet-v2-fpnlite-320` model and fine tunes it to your uploaded dataset. The training data I used can be found in the [training_data](training_data) folder. I found the raw dataset online [here](https://data.mendeley.com/datasets/njdjkbxdpn/1), but it required a little manipulation and cleaning before I could use it properly, so my folder structure, and some of the data, differs from the original. This data may not be perfect, but it did the job, and was very kindly made public by the paper's authors.[^1] 
+To train your own tank detecting model, you'll need to use your laptop, rather than the Pi. For the TankNotTank.tflite model I used this [Colab Notebook](https://colab.research.google.com/github/EdjeElectronics/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi/blob/master/Train_TFLite2_Object_Detction_Model.ipynb) put together by *EdjeElectronics* (if you haven't check out [their stuff](https://github.com/EdjeElectronics), you should, it's great). Essentially, the notebook takes a copy of the `ssd-mobilenet-v2-fpnlite-320` model and fine tunes it to your uploaded dataset. The training data I used can be found [here](https://data.mendeley.com/datasets/njdjkbxdpn/1), but it required a little manipulation and cleaning before I could use it properly, so my folder structure, and some of the data, differs from the original subtlety. This data may not be perfect, but it did the job, and was very kindly made public by the paper's authors.[^1] 
 
 The data has the following object classes:
 
@@ -83,18 +83,19 @@ The data has the following object classes:
 | military tank      | 
 | military truck     | 
 
-As this is a proof-of-concept, I only trained the model on free GPU time provided by Colab for 3 hours, so there is plenty of room for refinement. The end product was a quantized object detection model that does a pretty good job of classifying objects. However, as with many simple, quantized models, it makes some pretty dramatic mistakes and is easy to spoof. So, enjoy! But don't be surprised when you're face is occasionally mistaken for a airliner... 
+As this is a proof-of-concept, I only trained my model on free GPU time provided by Colab for 3 hours, so there is plenty of room for refinement. The end product was a quantized object detection model that does a pretty good job of classifying objects. However, as with many simple, quantized models, it makes some pretty dramatic mistakes and is easy to spoof. So, enjoy! But don't be surprised when you're face is occasionally mistaken for an airliner... 
 
 ### Configuring Our New Model
-As you may have guessed, it is now time for some extra configuration. In our case, it transpires that the process above does not produce a model with the metadata required by the specific OpenCV implementation used. All it requires is the latest version of `tflite-support`. Aside from that, it is straightforward:
+As you may have guessed, it is now time for some extra configuration. In our case, it transpires that the process above does not produce a model with the metadata required by the specific OpenCV implementation used. However, this is easy to rectify, and all it requires is the latest version of `tflite-support`. Aside from that, it is straightforward:
 
-1. Take a copy of the [metadata](/metadata) folder from this project and place the `TankNotTank.tflite` model within it. 
-2. Call `python3 add_metadata.py`
+1. Take a copy of the [metadata](/metadata) folder from this project and place the `TankNotTank.tflite` model within it.
+2. Update `add_metadata.py` to edit in your own model name
+3. Call `python3 add_metadata.py`
 
 This will add the relevant metadata to the `.tflite` model you've trained, and it should now be ready to transfer to the Pi for use. Just place it in the main working directory and run the following:
 
 ```
-python3 detect.py --model <YourModelNameHere.tflite
+python3 detect.py --model <YourModelNameHere>.tflite
 ```
 
 
