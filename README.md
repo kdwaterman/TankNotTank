@@ -43,6 +43,7 @@ Next we make a virtual environment in which to clone the repo and install the re
 
 ```
 python3 -m venv tnt
+source tnt/bin/activate
 git clone https://github.com/kdwaterman/TankNotTank.git
 cd TankNotTank
 sh setup.sh
