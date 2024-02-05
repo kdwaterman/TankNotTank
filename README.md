@@ -16,7 +16,9 @@ To get started with TankNotTank, you will need the following hardware:
 1. Either a Raspberry Pi Zero 2 W or a Raspberry Pi 4 
 2. Raspberry Pi 5MP Camera 
 
-Optionally, you may also want to add a touch screen to make the setup portable. In this case, I'd recommend the `onboard` keyboard as opposed to the `matchbox-keyboard`, was is not optimally configured for the OS we will use. 
+Optionally, you may also want to add a touch screen to make the setup portable. In this case, I'd recommend the `onboard` keyboard as opposed to the `matchbox-keyboard`, was is not optimally configured for the OS we will use. My setup looks like this:
+
+![Hardware setup](images/hardware_setup.jpg "Hardware setup")
 
 It is worth noting that the Pi Zero runs rather a lot slower than the Pi 4, offering an average of ~2 FPS rather than ~5.5 FPS. However, the size differential between the two is considerable, which means the Pi Zero would probably be a better choice for a companion computer on a drone. 
 
