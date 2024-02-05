@@ -16,7 +16,7 @@ To get started with TankNotTank, you will need the following hardware:
 1. Either a Raspberry Pi Zero 2 W or a Raspberry Pi 4 
 2. Raspberry Pi 5MP Camera 
 
-Optionally, you may also want to add a touch screen to make the setup portable. In this case, I'd recommend the `onboard` keyboard as opposed to the `matchbox-keyboard`, was is not optimally configured for the OS we will use. My setup looks like this:
+Optionally, you may also want to add a touch screen to make the setup portable. In this case, I'd recommend the `onboard` keyboard as opposed to the `matchbox-keyboard`, as is not optimally configured for the OS we will use. My setup looks like this:
 
 ![Hardware setup](images/hardware_setup.jpg "Hardware setup")
 
