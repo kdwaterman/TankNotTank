@@ -1,7 +1,7 @@
 # TankNotTank
 
 ## Introduction
-Welcome to TankNotTank! This project was the result of a simple curiosity - how easy would it be to train and deploy a tank finding algorithm on an edge computing device? This isn't a normal curiosity, admittedly, but watching FPV drones flying around Ukraine did make me think - how easy would it be to make these autonomously track tanks? For  This project doesn't quite go in to that detail, but it does provide a minimal proof-of-concept, complete with a trained model and the underlying training data. It should go without saying that this project is **strictly for educational purposes only**. 
+Welcome to TankNotTank! This project was the result of a simple curiosity - how easy would it be to train and deploy a tank finding algorithm on an edge computing device? This isn't a normal curiosity, admittedly, but watching FPV drones flying around Ukraine did make me think - how easy would it be to make these autonomously track tanks? This project doesn't quite go in to that detail, but it does provide a minimal proof-of-concept, complete with a trained model and the underlying training data. It should go without saying that this project is **strictly for educational purposes only**. 
 
 As you will see, whilst it demonstrates an ability to accomplish the task in a basic sense, to get this right, reliable, and 'safe', would require a fair bit of extra effort. I've tested it on cars, trucks, and vans, but I'm a little short of tanks in my neighbourhood, however pointing it at images of them works well enough:
 
