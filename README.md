@@ -7,7 +7,7 @@ As you will see, whilst it demonstrates an ability to accomplish the task in a b
 
 ![Testing against an image of a T-90](images/tnt.gif "Testing against an image of a T-90")
 
-**EDIT - it turns out it works pretty well on real tanks. Altough it got a little confused with a Swedish S tank with it's anti-HEAT screen up...**
+**EDIT - it turns out it works pretty well on real tanks. Altough it got a little confused with a Swedish S tank with its anti-HEAT screen up...**
 
 This project draws very heavily on [tensorflow examples](https://github.com/tensorflow/examples/tree/master/lite/examples/object_detection/raspberry_pi). However it makes a number of subtle changes that resolve some compatability issues that appear to have arisen since the original tensorflow examples were published. Indeed, if you take a look at the latest comments in this [explainer video](https://www.youtube.com/watch?v=mNjXEybFn98&t=173s), you'll find most of the them from keen, but disappointed, hobbyists struggling to get the project working. Whilst these issues were not technically complex to fix, they were a pain to find, so at minimum I hope this might save someone else some time!
 
